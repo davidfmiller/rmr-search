@@ -5,12 +5,20 @@
   <link rel="stylesheet" type="text/css" href="https://davidfmiller.github.io/man/man.css">
   <link rel="stylesheet" type="text/css" href="build/rmr-search.css">
   <style>
+  /* override styles from man.css*/
+  #man input[type=search]:not([disabled]):hover,
+  #man input[type=search]:focus {
+    transform: none;
+  }
+  
+  
   .rmr-search ul {
     background: rgba(16,16,16,0.95);
     border-radius: 5px;
     overflow: hidden;
     margin: 0;
     padding: 0;
+    width: 200px;
   }
   .rmr-search ul li {
     list-style-type: none;
@@ -21,6 +29,12 @@
     display: block;
     border: none;
     text-decoration: underline;
+    padding: 5px 10px;
+  }
+
+  .rmr-search ul li em {
+    display: block;
+    border: none;
     padding: 5px 10px;
   }
 
@@ -39,12 +53,16 @@
   <div id="man">
     <h1>rmr-search</h1>
     <div class="rmr-search">
-      <input type="search" name="" value="">
+      <input type="search">
     </div>
 
     <p>
-      Inspired by <a href="https://gist.github.com/eddiewebb/735feb48f50f0ddd65ae5606a1cb41ae">Eddie Webbinaro</a>, built atop of <a href="https://fusejs.io">fuse.js</a>.
+      Inspired by <a href="https://gist.github.com/eddiewebb/735feb48f50f0ddd65ae5606a1cb41ae" target="_blank">Eddie Webbinaro</a>, built atop of <a href="https://fusejs.io" target="_blank">fuse.js</a>.
     </p>
+
+    <footer>
+      Hosted on <a href="https://github.com/davidfmiller/rmr-search">GitHub</a>.
+    </footer>
 
   </div>
 
@@ -56,6 +74,7 @@
     window.Man({ pre: true });
 
     RMRSearch({
+      index: 'index.json',
       node: '.rmr-search',
       format: (obj) => {
         if (obj) {

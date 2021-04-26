@@ -1,3 +1,3 @@
 # rmr-search
 
-Built atop [fusejs](https://fusejs.io).
+[Example](http://davidfmiller.github.io/rmr-search).

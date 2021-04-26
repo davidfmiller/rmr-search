@@ -119,12 +119,12 @@
 
 
     function fetchJSONFile(path, callback) {
+      if (! callback) { return; }
+
       const httpRequest = new XMLHttpRequest();
       httpRequest.onreadystatechange = function() {
         if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-          if (callback) {
-            callback(JSON.parse(httpRequest.responseText));
-          }
+          callback(JSON.parse(httpRequest.responseText));
         }
       };
       httpRequest.open('GET', path);
