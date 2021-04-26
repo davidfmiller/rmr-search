@@ -3,27 +3,82 @@
 <head>
   <title>rmr-search</title>
   <link rel="stylesheet" type="text/css" href="https://davidfmiller.github.io/man/man.css">
-<!--   <link rel="stylesheet" type="text/css" href="build/rmr-tabs.css"> -->
+  <link rel="stylesheet" type="text/css" href="build/rmr-search.css">
   <style>
+  .rmr-search ul {
+    background: rgba(16,16,16,0.95);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+  .rmr-search ul li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .rmr-search ul li a {
+    display: block;
+    border: none;
+    text-decoration: underline;
+    padding: 5px 10px;
+  }
+
+  .rmr-search ul li a:hover {
+    background: #000;
+  }
+
+  .rmr-search ul li:before {
+    content: "";
+    padding: 0;
+  }
   </style>
 </head>
 <body>
   
   <div id="man">
     <h1>rmr-search</h1>
-    <input type="search" name="" value="">
+    <div class="rmr-search">
+      <input type="search" name="" value="">
+    </div>
+
+    <p>
+      Inspired by <a href="https://gist.github.com/eddiewebb/735feb48f50f0ddd65ae5606a1cb41ae">Eddie Webbinaro</a>, built atop of <a href="https://fusejs.io">fuse.js</a>.
+    </p>
+
   </div>
 
   <script src="build/rmr-search.bundle.js"></script>
   <script src="https://davidfmiller.github.io/man/man.js"></script>
   <script>
   document.addEventListener('DOMContentLoaded', function() {
-    window.Man({pre: true});
-    RMRTabs();
-    
-    
-    
-    
+
+    window.Man({ pre: true });
+
+    RMRSearch({
+      node: '.rmr-search',
+      format: (obj) => {
+        if (obj) {
+          return '<a href="' + obj.permalink + '" target="_blank">' + obj.title + '</a>';
+        }
+        return '<em>Nothing found.</em>';
+      },
+      fuse: {
+        shouldSort: false,
+        findAllMatches: false,
+        location: 0,
+        distance: 100,
+        isCaseSensitive: false,
+        threshold: 0.4,
+        minMatchCharLength: 2,
+        keys: [
+          'title',
+//           'category',
+//           'tags.human'
+          ]
+      }
+    });
+
   });
   </script>
 
