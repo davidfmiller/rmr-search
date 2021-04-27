@@ -7,6 +7,13 @@
   RMR = require('rmr-util'),
   Fuse = require('fuse.js');
 
+  /**
+    'node': querySelector or Node reference
+    'index': path to JSON file
+    'fuse': options dictionary for fuse (https://fusejs.io/api/options.html)
+    'max': the maximum number of items to display in the results list
+    'format': function that takes a single object from the JSON file, or `null` if nothing matches
+   */
   const init = function(options) {
 
     if (arguments.length == 0) {
@@ -121,16 +128,15 @@
     function fetchJSONFile(path, callback) {
       if (! callback) { return; }
 
-      const httpRequest = new XMLHttpRequest();
-      httpRequest.onreadystatechange = function() {
-        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-          callback(JSON.parse(httpRequest.responseText));
+      const req = new XMLHttpRequest();
+      req.onreadystatechange = function() {
+        if (req.readyState === 4 && req.status === 200) {
+          callback(JSON.parse(req.responseText));
         }
       };
-      httpRequest.open('GET', path);
-      httpRequest.send();
+      req.open('GET', path);
+      req.send();
     }
-
 
     function executeSearch(term) {
 
