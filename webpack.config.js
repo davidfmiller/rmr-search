@@ -9,7 +9,7 @@ const config = {
     path: path.resolve(__dirname, 'docs/build/'),
     filename: 'rmr-search.bundle.js'
   },
-  mode: 'development',
+  mode: 'production',
   watch: true,
   plugins : [
   ],
